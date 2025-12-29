@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hack Battle - Simulation Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="homeScreen" class="screen active">
+        <div class="container">
+            <div class="disclaimer">
+                <p>⚠️ DISCLAIMER: Ini adalah permainan SIMULASI FIKSI untuk hiburan sahaja. Semua senario adalah palsu dan tidak mewakili teknik sebenar.</p>
+            </div>
+            
+            <div class="header">
+                <div class="shield-icon">🛡️</div>
+                <h1 class="title">Hack Battle</h1>
+                <p class="subtitle">Permainan Perlumbaan Simulasi</p>
+            </div>
+
+            <div class="menu">
+                <input type="text" id="playerName" placeholder="Masukkan nama anda" class="input-field">
+                
+                <button onclick="createRoom()" class="btn btn-primary">
+                    👥 Buat Room
+                </button>
+
+                <div class="join-section">
+                    <input type="text" id="roomCodeInput" placeholder="Kod Room" class="input-field">
+                    <button onclick="joinRoom()" class="btn btn-secondary">Join</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lobby Screen -->
+    <div id="lobbyScreen" class="screen">
+        <div class="container">
+            <div class="room-info">
+                <h2>Room: <span id="roomCodeDisplay"></span></h2>
+                <p>Kongsi kod ini dengan pemain lain</p>
+            </div>
+
+            <div id="adminSettings" class="settings-panel" style="display: none;">
+                <h3>Tetapan Permainan</h3>
+                <div class="setting-group">
+                    <label>Target Parentwork:</label>
+                    <select id="targetParentwork" class="input-field">
+                        <option value="googledd">googledd</option>
+                        <option value="vercel">vercel</option>
+                        <option value="cloudflare">cloudflare</option>
+                        <option value="ngrok">ngrok</option>
+                        <option value="rizzglo">rizzglo</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label>Target URL:</label>
+                    <input type="text" id="targetUrl" value="https://example.com" class="input-field">
+                </div>
+            </div>
+
+            <div class="players-panel">
+                <h3>Pemain (<span id="playerCount">0</span>)</h3>
+                <div id="playersList"></div>
+            </div>
+
+            <button id="startGameBtn" onclick="startGame()" class="btn btn-success" style="display: none;">
+                ▶️ Mula Permainan
+            </button>
+            <button id="enterGameBtn" onclick="enterGame()" class="btn btn-success" style="display: none;">
+                Masuk Permainan
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <div class="container">
+            <div class="game-header">
+                <div class="info-card">
+                    <p class="label">Target</p>
+                    <p class="value" id="gameTargetPw"></p>
+                </div>
+                <div class="info-card">
+                    <p class="label">URL</p>
+                    <p class="value" id="gameTargetUrl"></p>
+                </div>
+                <div class="info-card">
+                    <p class="label">Langkah</p>
+                    <p class="value" id="currentStep">1/4</p>
+                </div>
+            </div>
+
+            <div class="terminal-panel">
+                <h3>🖥️ Terminal</h3>
+                
+                <div id="stepInstructions" class="instructions"></div>
+                
+                <div id="ipDisplay" class="success-msg" style="display: none;"></div>
+
+                <textarea id="terminalInput" class="terminal-input" placeholder="Masukkan arahan di sini..." rows="8"></textarea>
+
+                <button id="executeBtn" onclick="executeCommand()" class="btn btn-execute">
+                    Jalankan
+                </button>
+
+                <div id="blockedMsg" class="blocked-msg" style="display: none;">
+                    ⚠️ ANDA TELAH DI-BLOCK!
+                </div>
+            </div>
+
+            <div id="addonsPanel" class="addons-panel" style="display: none;">
+                <h3>⚡ Addons</h3>
+                <div class="addon-grid">
+                    <button onclick="useAddon('kill_air')" class="addon-card">
+                        <p class="addon-name">Kill Air</p>
+                        <p class="addon-desc">Block lawan selama 10 saat</p>
+                    </button>
+                    <button onclick="useAddon('change_pw')" class="addon-card">
+                        <p class="addon-name">Change Parentwork</p>
+                        <p class="addon-desc">Tukar parentwork lawan</p>
+                    </button>
+                    <button onclick="useAddon('ddos')" class="addon-card">
+                        <p class="addon-name">DDoS Attack</p>
+                        <p class="addon-desc">Reset progress lawan</p>
+                    </button>
+                </div>
+                <button onclick="skipAddon()" class="btn btn-skip">
+                    Teruskan Tanpa Addon
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Winner Screen -->
+    <div id="winnerScreen" class="screen">
+        <div class="container winner-container">
+            <div class="trophy">🏆</div>
+            <h1 id="winnerName" class="winner-title"></h1>
+            <p class="winner-subtitle">Berjaya menembusi sasaran!</p>
+            <button onclick="location.reload()" class="btn btn-primary">
+                Main Lagi
+            </button>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+                          </html>
